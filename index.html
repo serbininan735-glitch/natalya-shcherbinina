@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сайт собирается</title>
+<meta name="description" content="Наталья Щербинина помогает навести порядок в сайте, контенте, заявках и автоматизации рабочих процессов.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Сайт собирается">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css">
+<style>
+
+:root, .светлый { --цвет-кнопки: #762F44; --цвет-на-кнопке: #F8F4EC; --цвет-кнопки-навёл: var(--цвет-акцент-тёмный); }
+.тёмный { --цвет-кнопки: #B79779; --цвет-на-кнопке: #472730; --цвет-кнопки-навёл: #C5AC94; }
+
+</style>
+<script>
+(function () {
+  var ЭТАЛОН = 0.535;                  // очко Open Sans — текстовой гарнитуры утверждённых макетов
+  var ПОТОЛОК = 1.2, МЁРТВАЯ = 0.02;   // выше потолка расползается раскладка; ближе к единице не трогаем вовсе
+  var КОМПЬЮТЕР = "(min-width: 900px)";
+  var ТОКЕНЫ = ["--кегль-текст", "--кегль-лид", "--кегль-мелкий", "--кегль-кикер"];
+  var корень = document.documentElement;
+  var холст = document.createElement("canvas").getContext("2d");
+  var ждём = 0;
+
+  function мера(буква) { var м = холст.measureText(буква); return (м && м.actualBoundingBoxAscent) || 0; }
+
+  function применить() {
+    ждём = 0;
+    if (!холст) { return; }
+
+    for (var i = 0; i < ТОКЕНЫ.length; i++) { корень.style.removeProperty(ТОКЕНЫ[i]); }
+    var стиль = getComputedStyle(корень), стек = стиль.getPropertyValue("--шрифт-текста").trim();
+    if (!стек) { return; }
+    холст.font = "400 100px " + стек;
+
+    var очко = Math.max(мера("х"), мера("x")) / 100;
+    if (!(очко > 0)) { return; }
+    var k = Math.round(Math.min(ПОТОЛОК, Math.max(1, ЭТАЛОН / очко)) * 1000) / 1000;
+    if (k - 1 < МЁРТВАЯ || !matchMedia(КОМПЬЮТЕР).matches) { k = 1; }
+    корень.setAttribute("data-очко", очко.toFixed(3));      // чтобы проверка могла сказать числа вслух
+    корень.setAttribute("data-поправка", k.toFixed(3));
+    if (k === 1) { return; }
+    for (i = 0; i < ТОКЕНЫ.length; i++) {
+      var было = стиль.getPropertyValue(ТОКЕНЫ[i]).trim();
+      if (было) { корень.style.setProperty(ТОКЕНЫ[i], "calc((" + было + ") * " + k + ")"); }
+    }
+  }
+
+  применить();
+
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(применить); }
+
+  addEventListener("resize", function () { ждём = ждём || requestAnimationFrame(применить); });
+})();
+</script>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#F5EFE5;color:#292725;font-family:Inter,Arial,sans-serif}
+  .hero{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,48%);background:#F5EFE5;overflow:hidden}
+  .hero__copy{padding:clamp(32px,6vw,88px) clamp(24px,6vw,88px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+  .hero__name{font:700 clamp(22px,2vw,30px)/1.1 Manrope,Arial,sans-serif;margin:0 0 clamp(48px,9vh,110px)}
+  .hero__eyebrow{display:inline-block;margin:0 0 20px;padding:9px 14px;border-radius:999px;background:#292725;color:#FFFDF9;font-size:16px;font-weight:700}
+  .hero h1{max-width:720px;margin:0;color:#292725;font:750 clamp(42px,5.2vw,76px)/.99 Manrope,Arial,sans-serif;letter-spacing:-.04em}
+  .hero h1 em{font-style:normal;color:#8F2638}
+  .hero__lead{max-width:650px;margin:28px 0 0;color:#79533B;font-size:clamp(17px,1.5vw,22px);line-height:1.45}
+  .hero__action{margin-top:32px;display:inline-flex;align-items:center;justify-content:center;padding:16px 25px;border-radius:12px;background:#8F2638;color:#FFFDF9;text-decoration:none;font-weight:700;font-size:16px;transition:background .2s}
+  .hero__action:hover{background:#70202E}.hero__action:active{background:#5B1A26}
+  .hero__trust{margin:18px 0 0;color:#79533B;font-size:16px;line-height:1.4}
+  .hero__photo{min-height:100vh;position:relative;background:#D8A132;overflow:hidden}
+  .hero__photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top}
+  @media(max-width:899px){.hero{grid-template-columns:minmax(0,1fr) minmax(110px,34vw);min-height:100svh}.hero__copy{padding:24px 12px 32px 16px;justify-content:flex-start}.hero__name{font-size:18px;margin-bottom:38px}.hero__eyebrow{font-size:11px;padding:7px 9px;margin-bottom:14px}.hero h1{font-size:clamp(28px,9vw,38px);line-height:1.02;letter-spacing:-.035em;overflow-wrap:anywhere}.hero__lead{font-size:16px;line-height:1.35;margin-top:20px;overflow-wrap:anywhere}.hero__action{width:100%;padding:14px 8px;margin-top:22px;text-align:center}.hero__trust{font-size:12px;margin-top:14px}.hero__photo{min-height:100svh}.hero__photo img{object-position:52% top}}
+  @media(max-width:899px){body.mobile-option-2 .hero{grid-template-columns:minmax(0,1fr) minmax(170px,46vw)}body.mobile-option-2 .hero__copy{padding-right:10px}body.mobile-option-2 .hero h1{font-size:clamp(27px,8vw,34px)}body.mobile-option-2 .hero__photo img{object-position:62% top}body.mobile-option-3 .hero{grid-template-columns:minmax(0,1fr) minmax(155px,43vw)}body.mobile-option-3 .hero__copy{padding-right:8px}body.mobile-option-3 .hero h1{font-size:clamp(27px,8vw,34px)}body.mobile-option-3 .hero__photo img{object-position:72% top}}
+  @media(max-width:899px){body.mobile-option-4,body.mobile-option-5{overflow-x:hidden}body.mobile-option-4 .hero,body.mobile-option-5 .hero{display:flex;flex-direction:column;width:100%;min-height:100svh;overflow:visible}body.mobile-option-4 .hero__copy,body.mobile-option-5 .hero__copy{order:1;width:100%;min-width:0;padding:24px 16px 28px}body.mobile-option-4 .hero__lead,body.mobile-option-5 .hero__lead{width:auto;max-width:calc(100vw - 32px)!important;min-width:0;overflow-wrap:anywhere;word-break:break-word}body.mobile-option-4 .hero__trust,body.mobile-option-5 .hero__trust{max-width:calc(100vw - 32px)!important}body.mobile-option-4 .hero__photo,body.mobile-option-5 .hero__photo{order:2;width:100%;min-width:0;min-height:0;height:clamp(360px,78vw,520px)}body.mobile-option-4 .hero__photo img,body.mobile-option-5 .hero__photo img{object-position:center 12%}body.mobile-option-4 .hero h1,body.mobile-option-5 .hero h1{font-size:clamp(30px,9vw,40px)}body.mobile-option-5 .hero__photo{height:clamp(300px,68vw,460px)}body.mobile-option-5 .hero__photo img{object-position:center 18%}}
+  @media(max-width:899px){body.mobile-option-4 .hero__copy{padding-right:20px}body.mobile-option-4 .hero__eyebrow{font-size:16px!important}body.mobile-option-4 .hero__lead{display:block!important;width:calc(100vw - 40px)!important;max-width:calc(100vw - 40px)!important;min-width:0!important;font-size:16px;line-height:1.32;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}body.mobile-option-4 .hero__trust{display:block!important;width:calc(100vw - 40px)!important;font-size:16px!important;max-width:calc(100vw - 40px)!important;white-space:normal!important;overflow-wrap:anywhere!important}}
+  #screen-02{background:#F5EFE5;padding:clamp(56px,8vw,104px) 20px;color:#292725}#screen-02 .problem__inner{max-width:1180px;margin:0 auto}#screen-02 .problem__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-02 h2{max-width:760px;margin:18px 0 20px;font:750 clamp(34px,4.5vw,60px)/1.02 Manrope,Arial,sans-serif;letter-spacing:-.035em}#screen-02 .problem__lead{max-width:720px;margin:0 0 38px;color:#79533B;font-size:18px;line-height:1.5}#screen-02 .problem__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}#screen-02 .problem__item{padding:22px 24px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9;font-size:16px;line-height:1.45}#screen-02 .problem__item strong{display:block;margin-bottom:6px;color:#8F2638;font:700 18px/1.2 Manrope,Arial,sans-serif}@media(max-width:899px){#screen-02{padding:56px 16px}#screen-02 h2{font-size:36px}#screen-02 .problem__lead{font-size:16px}#screen-02 .problem__list{grid-template-columns:1fr;gap:12px}#screen-02 .problem__item{padding:18px 16px}}
+  #screen-03{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-03 .result__inner{max-width:1180px;margin:0 auto}#screen-03 .result__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-03 h2{max-width:820px;margin:18px 0 20px;color:#292725;font:750 clamp(36px,5vw,68px)/1.02 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-03 .result__lead{max-width:760px;margin:0 0 42px;color:#79533B;font-size:18px;line-height:1.5}#screen-03 .result__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}#screen-03 .result__item{min-height:142px;padding:24px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9;color:#292725;font-size:16px;line-height:1.45}#screen-03 .result__item strong{display:block;margin-bottom:9px;color:#8F2638;font:700 20px/1.15 Manrope,Arial,sans-serif}#screen-03 .result__after{max-width:900px;margin:42px 0 0;padding:20px 24px;border-left:4px solid #D8A132;background:#8F2638;color:#FFFDF9;font-size:17px;line-height:1.45}@media(max-width:899px){#screen-03{padding:58px 16px}#screen-03 h2{font-size:38px}#screen-03 .result__lead{font-size:16px;margin-bottom:32px}#screen-03 .result__list{grid-template-columns:1fr;gap:12px}#screen-03 .result__item{min-height:0;padding:19px 17px}#screen-03 .result__item strong{font-size:18px}#screen-03 .result__after{margin-top:32px;padding:17px 16px;font-size:16px}}
+  #screen-04{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-04 .process__inner{max-width:1180px;margin:0 auto}#screen-04 .process__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-04 h2{max-width:820px;margin:18px 0 20px;font:750 clamp(36px,5vw,68px)/1.02 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-04 .process__lead{max-width:760px;margin:0 0 42px;color:#79533B;font-size:18px;line-height:1.5}#screen-04 .process__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none;counter-reset:process}#screen-04 .process__item{position:relative;min-height:180px;padding:28px 28px 24px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9;counter-increment:process}#screen-04 .process__item::before{content:counter(process,decimal-leading-zero);display:block;margin-bottom:28px;color:#D8A132;font:700 28px/1 Manrope,Arial,sans-serif}#screen-04 .process__item strong{display:block;margin-bottom:8px;color:#8F2638;font:700 21px/1.15 Manrope,Arial,sans-serif}#screen-04 .process__item span{font-size:16px;line-height:1.45}#screen-04 .process__after{max-width:900px;margin:42px 0 0;padding:20px 24px;border-left:4px solid #D8A132;background:#8F2638;color:#FFFDF9;font-size:17px;line-height:1.45}@media(max-width:899px){#screen-04{padding:58px 16px}#screen-04 h2{font-size:38px}#screen-04 .process__lead{font-size:16px;margin-bottom:32px}#screen-04 .process__list{grid-template-columns:1fr;gap:12px}#screen-04 .process__item{min-height:0;padding:20px 17px}#screen-04 .process__item::before{margin-bottom:20px;font-size:24px}#screen-04 .process__item strong{font-size:19px}#screen-04 .process__after{margin-top:32px;padding:17px 16px;font-size:16px}}
+  #screen-05{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-05 .directions__inner{max-width:1180px;margin:0 auto}#screen-05 .directions__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-05 h2{max-width:820px;margin:18px 0 20px;font:750 clamp(36px,5vw,68px)/1.02 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-05 .directions__lead{max-width:760px;margin:0 0 42px;color:#79533B;font-size:18px;line-height:1.5}#screen-05 .directions__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}#screen-05 .directions__item{min-height:160px;padding:26px 28px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9}#screen-05 .directions__item strong{display:block;margin-bottom:9px;color:#8F2638;font:700 22px/1.15 Manrope,Arial,sans-serif}#screen-05 .directions__item span{font-size:16px;line-height:1.45}#screen-05 .directions__after{max-width:900px;margin:42px 0 0;padding:20px 24px;border-left:4px solid #D8A132;background:#FFFDF9;color:#79533B;font-size:17px;line-height:1.45}@media(max-width:899px){#screen-05{padding:58px 16px}#screen-05 h2{font-size:38px}#screen-05 .directions__lead{font-size:16px;margin-bottom:32px}#screen-05 .directions__list{grid-template-columns:1fr;gap:12px}#screen-05 .directions__item{min-height:0;padding:20px 17px}#screen-05 .directions__item strong{font-size:19px}#screen-05 .directions__after{margin-top:32px;padding:17px 16px;font-size:16px}}
+  #screen-06{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-06 .project__inner{max-width:1180px;margin:0 auto}#screen-06 .project__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-06 h2{max-width:900px;margin:18px 0 20px;font:750 clamp(34px,4.7vw,64px)/1.03 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-06 .project__lead{max-width:760px;margin:0 0 42px;color:#79533B;font-size:18px;line-height:1.5}#screen-06 .project__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}#screen-06 .project__item{min-height:220px;padding:26px 24px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9}#screen-06 .project__item strong{display:block;margin-bottom:24px;color:#D8A132;font:700 18px/1.15 Manrope,Arial,sans-serif}#screen-06 .project__item span{display:block;color:#292725;font-size:17px;line-height:1.45}#screen-06 .project__after{max-width:900px;margin:42px 0 0;padding:20px 24px;border-left:4px solid #8F2638;background:#FFFDF9;color:#79533B;font-size:17px;line-height:1.45}@media(max-width:899px){#screen-06{padding:58px 16px}#screen-06 h2{font-size:36px}#screen-06 .project__lead{font-size:16px;margin-bottom:32px}#screen-06 .project__list{grid-template-columns:1fr;gap:12px}#screen-06 .project__item{min-height:0;padding:20px 17px}#screen-06 .project__item strong{margin-bottom:15px;font-size:18px}#screen-06 .project__item span{font-size:16px}#screen-06 .project__after{margin-top:32px;padding:17px 16px;font-size:16px}}
+  #screen-07{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-07 .about__inner{max-width:1180px;margin:0 auto}#screen-07 .about__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-07 h2{max-width:900px;margin:18px 0 20px;font:750 clamp(34px,4.7vw,64px)/1.03 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-07 .about__lead{max-width:760px;margin:0 0 34px;color:#8F2638;font:700 20px/1.4 Manrope,Arial,sans-serif}#screen-07 .about__copy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:1000px}#screen-07 .about__copy p{margin:0;padding:26px 28px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9;font-size:17px;line-height:1.55}#screen-07 .about__after{max-width:900px;margin:42px 0 0;padding:20px 24px;border-left:4px solid #D8A132;background:#FFFDF9;color:#79533B;font-size:17px;line-height:1.45}@media(max-width:899px){#screen-07{padding:58px 16px}#screen-07 h2{font-size:36px}#screen-07 .about__lead{font-size:18px;margin-bottom:28px}#screen-07 .about__copy{grid-template-columns:1fr;gap:12px}#screen-07 .about__copy p{padding:20px 17px;font-size:16px}#screen-07 .about__after{margin-top:32px;padding:17px 16px;font-size:16px}}
+  #screen-08{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-08 .faq__inner{max-width:1180px;margin:0 auto}#screen-08 .faq__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-08 h2{max-width:820px;margin:18px 0 38px;font:750 clamp(36px,5vw,68px)/1.02 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-08 .faq__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}#screen-08 .faq__item{padding:24px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9;font-size:16px;line-height:1.45}#screen-08 .faq__item strong{display:block;margin-bottom:9px;color:#8F2638;font:700 18px/1.25 Manrope,Arial,sans-serif}#screen-08 .faq__invite{margin:42px 0 0;color:#79533B;font:700 20px/1.35 Manrope,Arial,sans-serif}#screen-08 .faq__action{display:inline-flex;margin-top:20px;padding:16px 25px;border-radius:12px;background:#8F2638;color:#FFFDF9;text-decoration:none;font:700 16px/1.2 Inter,Arial,sans-serif}#screen-08 .faq__action:hover{background:#70202E}#screen-08 .faq__action:active{background:#5B1A26}@media(max-width:899px){#screen-08{padding:58px 16px}#screen-08 h2{font-size:38px;margin-bottom:32px}#screen-08 .faq__list{grid-template-columns:1fr;gap:12px}#screen-08 .faq__item{padding:19px 17px;font-size:16px}#screen-08 .faq__invite{margin-top:32px;font-size:18px}#screen-08 .faq__action{width:100%;justify-content:center;margin-top:16px}}
+  #screen-09{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-09 .terms__inner{max-width:1180px;margin:0 auto}#screen-09 .terms__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-09 h2{max-width:900px;margin:18px 0 20px;font:750 clamp(34px,4.7vw,64px)/1.03 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-09 .terms__lead{max-width:800px;margin:0 0 42px;color:#79533B;font-size:18px;line-height:1.5}#screen-09 .terms__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}#screen-09 .terms__item{padding:22px 24px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9;font-size:16px;line-height:1.45}#screen-09 .terms__item strong{display:block;margin-bottom:7px;color:#8F2638;font:700 18px/1.2 Manrope,Arial,sans-serif}@media(max-width:899px){#screen-09{padding:58px 16px}#screen-09 h2{font-size:36px}#screen-09 .terms__lead{font-size:16px;margin-bottom:32px}#screen-09 .terms__list{grid-template-columns:1fr;gap:12px}#screen-09 .terms__item{padding:19px 17px;font-size:16px}}
+  #screen-10{background:#F5EFE5;color:#292725;padding:clamp(64px,9vw,116px) 20px}#screen-10 .price__inner{max-width:1180px;margin:0 auto}#screen-10 .price__kicker{color:#8F2638;font:700 14px/1.2 Inter,Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em}#screen-10 h2{max-width:820px;margin:18px 0 20px;font:750 clamp(36px,5vw,68px)/1.02 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-10 .price__lead{max-width:760px;margin:0 0 42px;color:#79533B;font-size:18px;line-height:1.5}#screen-10 .price__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}#screen-10 .price__item{min-height:300px;padding:26px 24px;border:1px solid #D8CFC3;border-radius:16px;background:#FFFDF9}#screen-10 .price__item strong{display:block;margin-bottom:18px;color:#8F2638;font:700 22px/1.15 Manrope,Arial,sans-serif}#screen-10 .price__item p{margin:0 0 14px;font-size:16px;line-height:1.45}#screen-10 .price__item p:last-child{margin-bottom:0}#screen-10 .price__item b{color:#79533B;font-weight:700}#screen-10 .price__note{max-width:900px;margin:42px 0 0;color:#79533B;font-size:16px;line-height:1.45}#screen-10 .price__action{display:inline-flex;margin-top:22px;padding:16px 25px;border-radius:12px;background:#8F2638;color:#FFFDF9;text-decoration:none;font:700 16px/1.2 Inter,Arial,sans-serif}#screen-10 .price__action:hover{background:#70202E}#screen-10 .price__action:active{background:#5B1A26}@media(max-width:899px){#screen-10{padding:58px 16px}#screen-10 h2{font-size:38px}#screen-10 .price__lead{font-size:16px;margin-bottom:32px}#screen-10 .price__list{grid-template-columns:1fr;gap:12px}#screen-10 .price__item{min-height:0;padding:20px 17px}#screen-10 .price__item strong{font-size:19px;margin-bottom:13px}#screen-10 .price__item p{font-size:16px}#screen-10 .price__note{margin-top:32px;font-size:16px}#screen-10 .price__action{width:100%;justify-content:center;margin-top:16px}}
+  #screen-11{background:#F5EFE5;color:#292725;padding:clamp(96px,14vw,190px) 20px;text-align:center}#screen-11 .final__inner{max-width:980px;margin:0 auto}#screen-11 h2{max-width:900px;margin:0 auto;font:750 clamp(38px,5.4vw,74px)/1.02 Manrope,Arial,sans-serif;letter-spacing:-.04em}#screen-11 .final__action{display:inline-flex;margin-top:34px;padding:17px 28px;border-radius:12px;background:#8F2638;color:#FFFDF9;text-decoration:none;font:700 16px/1.2 Inter,Arial,sans-serif}#screen-11 .final__action:hover{background:#70202E}#screen-11 .final__action:active{background:#5B1A26}@media(max-width:899px){#screen-11{padding:88px 16px}#screen-11 h2{font-size:38px}#screen-11 .final__action{width:100%;justify-content:center;margin-top:28px}}
+  .hero__photo{border-radius:24px 0 0 24px;box-shadow:0 18px 48px rgba(41,39,37,.14)}#screen-02 .problem__item,#screen-03 .result__item,#screen-04 .process__item,#screen-05 .directions__item,#screen-06 .project__item,#screen-07 .about__copy p,#screen-08 .faq__item,#screen-09 .terms__item,#screen-10 .price__item{box-shadow:0 10px 28px rgba(41,39,37,.06)}#screen-06 .project__item strong{color:#8F2638}@media(max-width:899px){.hero__photo{border-radius:24px;box-shadow:0 12px 30px rgba(41,39,37,.12)}body.mobile-option-4 .hero__eyebrow{font-size:13px}body.mobile-option-4 .hero__lead{font-size:16px}body.mobile-option-4 .hero__trust{font-size:13px}}
+</style>
+</head>
+<body class="mobile-option-4">
+<script>var mobileOption=new URLSearchParams(location.search).get('mobile');if(['2','3','4','5'].includes(mobileOption))document.body.className='mobile-option-'+mobileOption;</script>
+<main class="hero" id="screen-01">
+  <div class="hero__copy">
+    <p class="hero__name">Наталья Щербинина</p>
+    <p class="hero__eyebrow">Понятная система&nbsp;для дела</p>
+    <h1>Помогаю навести порядок в&nbsp;сайте, контенте&nbsp;и <em>заявках</em></h1>
+    <p class="hero__lead">Выстраиваю понятную систему для сайта, контента, обращений&nbsp;и автоматизации рутинных задач — от диагностики до внедрения.</p>
+    <a class="hero__action" href="https://t.me/natalya_shcherba">Обсудить задачу</a>
+    <p class="hero__trust">Единый план. Понятная система. Поэтапная работа.</p>
+  </div>
+  <div class="hero__photo"><img src="img/портрет-оптимизированный.jpg" alt="Наталья Щербинина за ноутбуком"></div>
+</main>
+<section id="screen-02">
+  <div class="problem__inner">
+    <div class="problem__kicker">Если всё держится на вас</div>
+    <h2>Когда рабочая система распалась на отдельные задачи</h2>
+    <p class="problem__lead">Если сайт, контент&nbsp;и обращения существуют отдельно, сначала нужно увидеть всю картину — и&nbsp;только потом решать, что менять.</p>
+    <ul class="problem__list">
+      <li class="problem__item"><strong>Частному специалисту</strong>Сайт есть, но посетителю непонятно, что делать дальше</li>
+      <li class="problem__item"><strong>Эксперту или автору</strong>Контент приходится каждый раз готовить&nbsp;и размещать вручную</li>
+      <li class="problem__item"><strong>Небольшой компании</strong>Заявки приходят из разных каналов&nbsp;и могут теряться</li>
+      <li class="problem__item"><strong>Руководителю</strong>Сервисов становится больше, а&nbsp;единой рабочей схемы всё ещё нет</li>
+      <li class="problem__item"><strong>Тому, кто устал от хаоса</strong>Непонятно, что&nbsp;делать в первую очередь</li>
+    </ul>
+  </div>
+</section>
+<section id="screen-03">
+  <div class="result__inner">
+    <div class="result__kicker">Что останется после работы</div>
+    <h2>Понятная система, с которой можно работать дальше</h2>
+    <p class="result__lead">Вместе определяем приоритетную задачу, внедряем необходимое и объясняем, как пользоваться результатом.</p>
+    <ul class="result__list">
+      <li class="result__item"><strong>Понятная структура сайта</strong>посетителю проще понять ваше предложение и следующий шаг</li>
+      <li class="result__item"><strong>Рабочая схема контента</strong>повторяющиеся задачи не приходится каждый раз собирать с нуля</li>
+      <li class="result__item"><strong>Организованный путь заявки</strong>обращение не теряется между каналами и этапами работы</li>
+      <li class="result__item"><strong>Настроенные рабочие сценарии</strong>меньше лишних ручных действий в повторяющихся процессах</li>
+      <li class="result__item"><strong>Инструкция по системе</strong>понятно, что уже работает и как развивать это дальше</li>
+    </ul>
+    <p class="result__after">Единый план вместо разрозненных решений — сначала главное, затем следующие улучшения по мере необходимости.</p>
+  </div>
+</section>
+<section id="screen-04">
+  <div class="process__inner">
+    <div class="process__kicker">Как мы работаем</div>
+    <h2>От диагностики до внедрения — поэтапно</h2>
+    <p class="process__lead">Не пытаемся сделать всё сразу: определяем главную задачу и двигаемся от неё к следующим улучшениям.</p>
+    <ol class="process__list">
+      <li class="process__item"><strong>Разбираемся</strong><span>смотрим, что уже работает, где возникают сложности и что отнимает больше всего времени</span></li>
+      <li class="process__item"><strong>Составляем план</strong><span>определяем главную задачу и последовательность действий</span></li>
+      <li class="process__item"><strong>Внедряем главное</strong><span>выбираем необходимые инструменты и настраиваем то, что действительно нужно</span></li>
+      <li class="process__item"><strong>Развиваем систему</strong><span>постепенно добавляем новые возможности и автоматизируем следующие задачи</span></li>
+    </ol>
+    <p class="process__after">На каждом этапе понятно, что уже сделано и какой следующий шаг имеет смысл.</p>
+  </div>
+</section>
+<section id="screen-05">
+  <div class="directions__inner">
+    <div class="directions__kicker">Направления работы</div>
+    <h2>Что можно привести в порядок</h2>
+    <p class="directions__lead">Состав работы определяется после диагностики: некоторые задачи можно решить отдельно, а некоторые лучше связать в одну систему.</p>
+    <ul class="directions__list">
+      <li class="directions__item"><strong>Сайт</strong><span>структура, содержание, формы обращения и подготовка к развитию</span></li>
+      <li class="directions__item"><strong>Контент</strong><span>организация материалов и упрощение повторяющихся задач</span></li>
+      <li class="directions__item"><strong>Заявки</strong><span>сбор обращений, каналы связи и понятная схема обработки</span></li>
+      <li class="directions__item"><strong>Автоматизация</strong><span>рабочие сценарии, связка инструментов и инструкции</span></li>
+    </ul>
+    <p class="directions__after">Не нужно внедрять всё сразу — сначала выбираем задачу, которая даст системе наибольшую ясность.</p>
+  </div>
+</section>
+<section id="screen-06">
+  <div class="project__inner">
+    <div class="project__kicker">Пример проекта</div>
+    <h2>«Навигатор косметология» — путь клиента в одной системе</h2>
+    <p class="project__lead">Онлайн-сервис для частных специалистов и небольших компаний сферы услуг.</p>
+    <ul class="project__list">
+      <li class="project__item"><strong>Было</strong><span>клиенту нужно самостоятельно разобраться, какая процедура ему подходит</span></li>
+      <li class="project__item"><strong>Стало</strong><span>клиент отвечает на вопросы и получает предварительную подборку процедур</span></li>
+      <li class="project__item"><strong>Следующий шаг</strong><span>клиент оставляет заявку на консультацию, а специалист видит её в административной панели</span></li>
+    </ul>
+  </div>
+</section>
+<section id="screen-07">
+  <div class="about__inner">
+    <div class="about__kicker">Кто будет рядом</div>
+    <h2>Система должна помогать вам, а не усложнять работу</h2>
+    <p class="about__lead">Наталья Щербинина · помогает частным специалистам, экспертам и небольшим компаниям</p>
+    <div class="about__copy">
+      <p>Помогаю навести порядок в сайте, контенте, обработке обращений и рабочих процессах. Начинаем с диагностики: разбираемся, что происходит сейчас, определяем приоритетную задачу и составляем понятный план действий.</p>
+      <p>Дальше я помогаю внедрить необходимые решения и объясняю, как с ними работать. Моя задача — не усложнить вашу работу новыми инструментами, а сделать систему понятнее и уменьшить количество лишней ручной работы.</p>
+    </div>
+  </div>
+</section>
+<section id="screen-08">
+  <div class="faq__inner">
+    <div class="faq__kicker">Спрашивают чаще всего</div>
+    <h2>Нужно ли сразу менять всё?</h2>
+    <ul class="faq__list">
+      <li class="faq__item"><strong>Нужно ли сразу внедрять всё?</strong>Нет. Начинаем с главной задачи и добавляем следующие шаги только при необходимости.</li>
+      <li class="faq__item"><strong>Подойдёт ли это небольшому бизнесу?</strong>Да, если сейчас сайт, контент или обращения требуют слишком много ручной работы; состав решения зависит от ситуации.</li>
+      <li class="faq__item"><strong>Вы просто предложите новый сервис?</strong>Нет. Сначала разбираемся в задаче, а инструмент выбираем после этого.</li>
+      <li class="faq__item"><strong>Можно ли обратиться только по одному направлению?</strong>Да. Можно начать с сайта, контента, заявок или отдельной задачи автоматизации.</li>
+      <li class="faq__item"><strong>Что нужно подготовить к разговору?</strong>Достаточно рассказать, что сейчас не работает или что отнимает больше всего времени.</li>
+    </ul>
+    <p class="faq__invite">Не нашли свой вопрос?</p>
+    <a class="faq__action" href="https://t.me/natalya_shcherba">Обсудить задачу</a>
+  </div>
+</section>
+<section id="screen-09">
+  <div class="terms__inner">
+    <div class="terms__kicker">Важно знать заранее</div>
+    <h2>Сначала разбираемся в задаче, потом фиксируем объём работы</h2>
+    <p class="terms__lead">Конкретные состав, формат, сроки и стоимость определяются после понимания исходной ситуации.</p>
+    <ul class="terms__list">
+      <li class="terms__item"><strong>Состав работы</strong>определяется после диагностики, а не выбирается вслепую из длинного списка</li>
+      <li class="terms__item"><strong>Сроки</strong>зависят от объёма и согласуются до начала внедрения</li>
+      <li class="terms__item"><strong>Инструменты</strong>выбираются под задачу, а не ради самого инструмента</li>
+      <li class="terms__item"><strong>Результат</strong>зависит от исходной системы, доступных материалов и участия клиента</li>
+      <li class="terms__item"><strong>Поддержка</strong>дополнительные изменения и развитие обсуждаются отдельно после запуска</li>
+    </ul>
+  </div>
+</section>
+<section id="screen-10">
+  <div class="price__inner">
+    <div class="price__kicker">Формат и стоимость</div>
+    <h2>Формат и стоимость работы</h2>
+    <p class="price__lead">Стоимость зависит от задачи, объёма работы и того, что уже есть у вашего бизнеса.</p>
+    <ul class="price__list">
+      <li class="price__item"><strong>Диагностика</strong><p>Сначала разбираемся в текущей ситуации: смотрим, что уже работает, где возникают сложности и какую задачу важно решить в первую очередь.</p><p><b>Результат:</b> понятная картина текущей ситуации и конкретный план дальнейших действий.</p></li>
+      <li class="price__item"><strong>Внедрение</strong><p>После диагностики определяем необходимые работы и инструменты.</p><p>Стоимость внедрения рассчитывается индивидуально — в зависимости от выбранного решения и объёма работ.</p></li>
+      <li class="price__item"><strong>Развитие</strong><p>После запуска систему можно постепенно развивать: добавлять новые функции, автоматизировать следующие задачи и улучшать рабочие процессы.</p><p>Стоимость следующего этапа определяется отдельно.</p></li>
+    </ul>
+    <p class="price__note">Сначала определяем задачу — затем предлагаем решение и рассчитываем стоимость.</p>
+    <a class="price__action" href="https://t.me/natalya_shcherba">Обсудить задачу</a>
+  </div>
+</section>
+<section id="screen-11">
+  <div class="final__inner">
+    <h2>Понятная система начинается с разговора о вашей задаче</h2>
+    <a class="final__action" href="https://t.me/natalya_shcherba">Обсудить задачу</a>
+  </div>
+</section>
+</body>
+</html>
