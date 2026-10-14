@@ -27,7 +27,7 @@
 @media(max-width:760px){.topbar{height:68px}.wrap{width:calc(100% - 36px)}.topbar>.wrap{gap:10px}.desktop-nav{display:none;position:absolute;top:68px;left:0;right:0;background:#1b1b1c;flex-direction:column;align-items:stretch;padding:24px 26px;gap:21px;border-top:1px solid #343436}.desktop-nav.open{display:flex}.mobile-toggle{display:block}.top-right{margin-left:auto;font-size:10px;padding-bottom:6px}.brand{gap:8px}.logo{height:30px;width:30px;font-size:17px}.brand .letter{font-size:13px}.hero-body{display:flex;flex-direction:column}.hero-copy{padding:53px 18px 50px;order:1;min-height:490px}.hero-brow{font-size:9px;letter-spacing:.13em;margin-bottom:26px}.hero-title{font-size:clamp(43px,10.2vw,80px);letter-spacing:-.085em;white-space:normal}.hero-small{margin:24px 0 20px;font-size:14px;line-height:1.6}.hero-actions{gap:17px}.solid-action{padding:16px 18px;font-size:11px;gap:20px}.text-action{font-size:11px}.hero-photo{order:2;height:460px}.hero-photo img{object-position:50% 24%}.hero-photo-text{right:18px;bottom:18px}.hero-bottom>.wrap{min-height:62px;font-size:8px;letter-spacing:.09em}.hero-bottom .right{display:none}.intro{padding:85px 0}.intro-heading{grid-template-columns:1fr;gap:25px;margin-bottom:38px}.intro-heading h2{font-size:clamp(42px,10vw,64px)}.intro-split{grid-template-columns:1fr;gap:22px}.intro-split p{font-size:15px}.intro-mini{margin-left:0}.services{padding:85px 0}.service-header{display:block;margin-bottom:36px}.service-header .h-section{font-size:clamp(48px,12.5vw,68px)}.service-header .desc{font-size:14px;margin-top:24px}.service-row{grid-template-columns:35px 1fr 25px;gap:10px;padding:27px 0;min-height:0}.service-row h3{font-size:33px}.service-row p{grid-column:2/3;grid-row:2;max-width:400px;font-size:13px}.service-row .arrow{grid-column:3;grid-row:1}.statement{grid-template-columns:1fr}.statement-image{height:380px}.statement-copy{min-height:450px;padding:45px 20px}.statement-copy h2{font-size:clamp(61px,11vw,82px)}.work{padding:85px 0}.work-head{display:block}.work-head h2{font-size:64px}.work-head p{font-size:14px}.work-grid{grid-template-columns:1fr}.work-visual{padding:18px;min-height:300px}.flow{gap:6px}.flow-step{padding:12px 8px;min-height:105px}.flow-step strong{font-size:12px}.work-copy{padding:37px 25px;min-height:360px}.work-copy h3{font-size:43px}.about{padding:85px 0}.about-grid{grid-template-columns:1fr;gap:38px}.about-image{height:510px}.about-copy h2{font-size:64px}.about-copy>p{font-size:15px}.contact{padding:90px 0 0}.contact-inner{grid-template-columns:1fr;gap:36px;padding-bottom:70px}.contact h2{font-size:68px}.contact .hint{font-size:14px}.diag-button{font-size:12px}.footer-top{padding-top:49px;display:block}.footer-title{font-size:clamp(53px,13vw,84px)}.footer-contact{display:inline-block;margin-top:34px}.footer-bottom{flex-direction:column;gap:12px}}
 
 @media(max-width:360px){.work-head h2{font-size:50px}.service-row>*{min-width:0}.work-grid>*{min-width:0}.work-visual .top{min-width:0}.work-visual .top span{min-width:0;overflow-wrap:anywhere}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}.work-copy .text-action--pending{cursor:default;opacity:.72}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -54,7 +54,7 @@ document.querySelectorAll('[data-problem]').forEach(b=>b.addEventListener('click
   var card=document.createElement('div');
   card.className='work-grid';
   card.setAttribute('data-third-project','true');
-  card.innerHTML='<div class="work-visual"><div class="top"><span>ПРИМЕР СЦЕНАРИЯ</span><span>САЙТ ДЛЯ ЧАСТНОГО СПЕЦИАЛИСТА / АДАПТИВНАЯ ВЁРСТКА</span></div><div class="flow"><div class="flow-step"><span>01</span><strong>Структура<br>страниц</strong></div><div class="flow-step"><span>02</span><strong>Услуги<br>и этапы</strong></div><div class="flow-step"><span>03</span><strong>Адаптивный<br>сайт</strong></div></div><div class="caption">Сайт с описанием услуг, примерами решений и стоимостью для частного специалиста.</div></div><div class="work-copy"><div><div class="tag" style="color:#ab93a0">ПРИМЕР РЕШЕНИЯ</div><h3>Сайт для частного специалиста</h3><p>Разработка адаптивного сайта с описанием услуг, этапов работы, примерами решений и стоимостью. Продумана структура страниц, удобная навигация и отображение на компьютере и телефоне.</p><p class="project-price">Стоимость проекта: <strong>10 000 ₽</strong></p></div><div class="work-actions"><span class="text-action text-action--pending" aria-disabled="true" title="Ссылка появится после публикации примера">Посмотреть сайт ↗</span><a href="#contact" class="text-action">Обсудить похожую задачу ↗</a></div></div>';
+  card.innerHTML='<div class="work-visual"><div class="top"><span>ПРИМЕР СЦЕНАРИЯ</span><span>САЙТ ДЛЯ ЧАСТНОГО СПЕЦИАЛИСТА / АДАПТИВНАЯ ВЁРСТКА</span></div><div class="flow"><div class="flow-step"><span>01</span><strong>Структура<br>страниц</strong></div><div class="flow-step"><span>02</span><strong>Услуги<br>и этапы</strong></div><div class="flow-step"><span>03</span><strong>Адаптивный<br>сайт</strong></div></div><div class="caption">Сайт с описанием услуг, примерами решений и стоимостью для частного специалиста.</div></div><div class="work-copy"><div><div class="tag" style="color:#ab93a0">ПРИМЕР РЕШЕНИЯ</div><h3>Сайт для частного специалиста</h3><p>Разработка адаптивного сайта с описанием услуг, этапов работы, примерами решений и стоимостью. Продумана структура страниц, удобная навигация и отображение на компьютере и телефоне.</p><p class="project-price">Стоимость проекта: <strong>10 000 ₽</strong></p></div><div class="work-actions"><a href="/primer-sayta/" class="text-action">Посмотреть сайт ↗</a><a href="#contact" class="text-action">Обсудить похожую задачу ↗</a></div></div>';
   wrap.appendChild(card);
 }());
 </script>
@@ -67,7 +67,7 @@ document.querySelectorAll('[data-problem]').forEach(b=>b.addEventListener('click
     var action=card.querySelector('.work-actions .text-action');
     if(title) title.textContent='Пример сайта за 10 000 ₽';
     if(copy) copy.textContent='Демонстрационный сайт для частного специалиста. Показывает, какой дизайн, структуру и функциональность можно получить в рамках такого проекта.';
-    if(action){ action.textContent='Посмотреть пример сайта ↗'; action.setAttribute('title','Ссылка появится после публикации примера'); }
+    if(action){ action.textContent='Посмотреть пример сайта ↗'; }
   }
   var old=document.querySelector('.contact-links a[href="https://natalya-digital.ru/"]');
   if(old){
@@ -79,12 +79,6 @@ document.querySelectorAll('[data-problem]').forEach(b=>b.addEventListener('click
     pending.textContent='Обсудить задачу ↗';
     old.replaceWith(pending);
   }
-}());
-</script>
-<script>
-(function(){
-  var action=document.querySelector('[data-third-project] .work-actions .text-action--pending');
-  if(action) action.setAttribute('aria-disabled','true');
 }());
 </script>
 </body>
